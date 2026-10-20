@@ -1,0 +1,11 @@
+# One entry per paper. Newest first.
+# Fields: title, authors, venue, note (optional), pdf, arxiv, slides, code (all optional).
+# Your name in `authors` is bolded automatically.
+# Put PDFs in assets/papers/ and link them as /assets/papers/filename.pdf
+
+- title: "[Working title] Best-of-Both-Worlds Guarantees for EFX Allocations"
+  authors: "Parth Dabas and Prajakta Nimbhorkar"
+  venue: "Manuscript, 2026"
+  note: "under submission"
+  pdf: /assets/papers/bobw-efx.pdf
+  arxiv: https://arxiv.org/abs/XXXX.XXXXX

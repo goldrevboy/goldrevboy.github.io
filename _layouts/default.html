@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% if page.url == "/" %}{{ site.author.name }}{% else %}{{ page.title }} · {{ site.author.name }}{% endif %}</title>
+  <meta name="description" content="{{ page.description | default: site.description }}">
+  <!-- Apply the visitor's saved light/dark choice before the page draws, so there's no flash. -->
+  <script>
+    try { var t = localStorage.getItem("theme"); if (t === "light" || t === "dark") document.documentElement.setAttribute("data-theme", t); } catch (e) {}
+  </script>
+  <link rel="stylesheet" href="{{ '/assets/css/style.css' | relative_url }}">
+  {% if page.math %}
+  <!-- LaTeX support. Turn it on for a page by adding `math: true` to its front matter. -->
+  <script>window.MathJax = { tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] } };</script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-mml-chtml.js"></script>
+  {% endif %}
+</head>
+<body>
+  <header class="masthead">
+    <div class="wrap">
+      <a class="site-name" href="{{ '/' | relative_url }}">{{ site.author.name }}</a>
+      <nav>
+        {% for item in site.nav %}
+          {% assign active = false %}
+          {% if page.url contains item.url %}{% assign active = true %}{% endif %}
+          <a href="{{ item.url | relative_url }}"{% if active %} class="active" aria-current="page"{% endif %}>{{ item.title }}</a>
+        {% endfor %}
+        <button class="theme-toggle" id="theme-toggle" type="button">Dark</button>
+      </nav>
+    </div>
+  </header>
+
+  <div class="wrap layout">
+    <aside class="profile">
+      {% if site.author.photo %}
+        <img class="profile-photo" src="{{ site.author.photo | relative_url }}" alt="{{ site.author.name }}">
+      {% else %}
+        <div class="profile-photo" aria-hidden="true"></div>
+      {% endif %}
+      <p class="profile-name">{{ site.author.name }}</p>
+      <p class="profile-role">{{ site.author.role }}<br>{{ site.author.affiliation }}</p>
+      <ul class="profile-links">
+        <li class="email">{{ site.author.email }}</li>
+        <li><a href="{{ '/cv/' | relative_url }}">CV</a></li>
+        {% if site.author.scholar %}<li><a href="{{ site.author.scholar }}">Google Scholar</a></li>{% endif %}
+        {% if site.author.github %}<li><a href="{{ site.author.github }}">GitHub</a></li>{% endif %}
+        {% if site.author.linkedin %}<li><a href="{{ site.author.linkedin }}">LinkedIn</a></li>{% endif %}
+      </ul>
+    </aside>
+
+    <main class="content">
+      {{ content }}
+    </main>
+  </div>
+
+  <footer class="site-footer">
+    <div class="wrap">Last updated {{ site.time | date: "%B %Y" }}</div>
+  </footer>
+
+  <script>
+    (function () {
+      var root = document.documentElement, btn = document.getElementById("theme-toggle");
+      function current() {
+        var t = root.getAttribute("data-theme");
+        if (t) return t;
+        return window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+      }
+      function label() {
+        var next = current() === "dark" ? "light" : "dark";
+        btn.textContent = next === "dark" ? "Dark" : "Light";
+        btn.setAttribute("aria-label", "Switch to " + next + " mode");
+      }
+      btn.addEventListener("click", function () {
+        var next = current() === "dark" ? "light" : "dark";
+        root.setAttribute("data-theme", next);
+        try { localStorage.setItem("theme", next); } catch (e) {}
+        label();
+      });
+      label();
+    })();
+  </script>
+</body>
+</html>

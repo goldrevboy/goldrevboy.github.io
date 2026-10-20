@@ -1,0 +1,26 @@
+# One entry per project. Shown on the Projects page in this order.
+# Fields: name, year, description (one or two sentences), link (optional), tags (optional).
+
+- name: Hierarchical RL scheduler for cloud and fog computing
+  year: 2026
+  description: "Bachelor's thesis project. A two-level reinforcement learning scheduler that places tasks across cloud and fog nodes."
+  link: https://github.com/your-username/hrl-scheduler
+  tags: [reinforcement learning, scheduling]
+
+- name: Federated learning over multi-hop IoT networks
+  year: 2026
+  description: "Semester project on running federated learning when clients reach the server through several relay hops."
+  link: https://github.com/your-username/multihop-fl
+  tags: [federated learning, networks]
+
+- name: Compiler for SegFault 2026
+  year: 2026
+  description: "Hackathon compiler project. Replace this line with what it compiles, to what, and what was interesting about it."
+  link: https://github.com/your-username/segfault-compiler
+  tags: [compilers]
+
+- name: Distributed systems from scratch
+  year: 2026
+  description: "Self-directed implementations following CodeCrafters and the MIT 6.5840 (6.824) labs. List the systems you've finished here."
+  link: https://github.com/your-username
+  tags: [distributed systems]

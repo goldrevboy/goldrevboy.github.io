@@ -1,0 +1,163 @@
+/* Layout: thin top bar, then a profile sidebar beside one text column. Stacks on phones.
+   Colors: "Cool slate" light theme + blue-grey dark theme. Change them here. */
+:root {
+  --bg: #f7f8fa;
+  --fg: #1b2330;
+  --muted: #5a6577;
+  --rule: #dde2ea;
+  --surface: #eceff4;
+  --link: #1f5fbf;
+  --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --mono: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  --page: 62rem;
+}
+
+/* Dark theme: used when the device is in dark mode, unless the visitor picked Light. */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #15171c; --fg: #e3e5ea; --muted: #9198a5; --rule: #2b2f38;
+    --surface: #1e2128; --link: #8ab4f8; color-scheme: dark;
+  }
+}
+/* Dark theme when the visitor clicks the toggle. Keep these values identical to the block above. */
+:root[data-theme="dark"] {
+  --bg: #15171c; --fg: #e3e5ea; --muted: #9198a5; --rule: #2b2f38;
+  --surface: #1e2128; --link: #8ab4f8; color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--fg);
+  font-family: var(--sans);
+  font-size: 1rem;
+  line-height: 1.65;
+}
+
+a { color: var(--link); text-decoration: none; }
+a:hover { text-decoration: underline; }
+a:focus-visible, button:focus-visible { outline: 2px solid var(--link); outline-offset: 2px; }
+::selection { background: color-mix(in srgb, var(--link) 25%, transparent); }
+
+.wrap {
+  max-width: var(--page);
+  margin: 0 auto;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+}
+
+/* ---------- Top bar ---------- */
+.masthead { border-bottom: 1px solid var(--rule); }
+.masthead .wrap {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem 1.5rem;
+  padding-block: 0.9rem;
+}
+.site-name { color: var(--fg); font-weight: 600; font-size: 1.1rem; }
+.site-name:hover { text-decoration: none; }
+.masthead nav { display: flex; flex-wrap: wrap; align-items: center; gap: 0.25rem 1.25rem; font-size: 0.95rem; }
+.masthead nav a { color: var(--muted); }
+.masthead nav a:hover, .masthead nav a.active { color: var(--fg); }
+.masthead nav a.active { font-weight: 600; }
+.theme-toggle {
+  font: inherit;
+  font-size: 0.85rem;
+  color: var(--muted);
+  background: none;
+  border: 1px solid var(--rule);
+  border-radius: 4px;
+  padding: 0.1rem 0.55rem;
+  cursor: pointer;
+}
+.theme-toggle:hover { color: var(--fg); border-color: var(--muted); }
+
+/* ---------- Sidebar + content ---------- */
+.layout {
+  display: grid;
+  grid-template-columns: 13rem minmax(0, 1fr);
+  gap: 3rem;
+  padding-block: 2.5rem 3rem;
+}
+
+.profile { font-size: 0.92rem; }
+.profile-photo {
+  display: block;
+  width: 100%;
+  max-width: 11rem;
+  aspect-ratio: 1;
+  object-fit: cover;
+  border-radius: 6px;
+  margin-bottom: 1rem;
+  background: var(--surface);
+}
+.profile-name { font-size: 1.15rem; font-weight: 600; margin: 0; }
+.profile-role { color: var(--muted); margin: 0.15rem 0 1rem; line-height: 1.45; }
+.profile-links { list-style: none; margin: 0; padding: 0; display: grid; gap: 0.2rem; }
+.profile-links .email { color: var(--muted); font-size: 0.85rem; word-break: break-all; }
+
+.content { max-width: 42rem; min-width: 0; }
+
+/* ---------- Text ---------- */
+h1 { font-size: 1.6rem; font-weight: 600; line-height: 1.25; margin: 0 0 1.25rem; text-wrap: balance; }
+h2 { font-size: 1.2rem; font-weight: 600; margin: 2.25rem 0 0.75rem; }
+.content > :first-child { margin-top: 0; }
+p { margin: 0 0 1rem; }
+ul, ol { padding-left: 1.25rem; margin: 0 0 1rem; }
+li { margin-bottom: 0.35rem; }
+code { font-family: var(--mono); font-size: 0.9em; background: var(--surface); padding: 0.05em 0.3em; border-radius: 3px; }
+pre { font-family: var(--mono); font-size: 0.88rem; background: var(--surface); padding: 0.8rem 1rem; border-radius: 4px; overflow-x: auto; }
+pre code { background: none; padding: 0; }
+.muted, .note { color: var(--muted); }
+.note { font-size: 0.92rem; }
+
+/* News, blog index, CV: date then text */
+.dated { list-style: none; padding: 0; }
+.dated li { display: grid; grid-template-columns: 6.5rem minmax(0, 1fr); gap: 1rem; margin-bottom: 0.45rem; }
+.date { color: var(--muted); font-size: 0.9rem; font-variant-numeric: tabular-nums; padding-top: 0.08rem; }
+
+/* ---------- Publications ---------- */
+.pubs { list-style: none; padding: 0; }
+.pub { margin-bottom: 1.25rem; }
+.pub-title, .pub-authors, .pub-venue { display: block; }
+.pub-title { font-weight: 600; }
+.pub-venue { font-style: italic; color: var(--muted); }
+.links { font-size: 0.88rem; }
+.links a + a::before { content: "·"; color: var(--muted); margin: 0 0.45rem; display: inline-block; }
+
+/* ---------- Projects ---------- */
+.projects { list-style: none; padding: 0; }
+.projects li { margin-bottom: 1.15rem; }
+.proj-name { font-weight: 600; }
+.proj-meta { color: var(--muted); font-size: 0.88rem; }
+
+/* ---------- Blog post ---------- */
+.post-meta { color: var(--muted); font-size: 0.9rem; margin-top: -0.75rem; }
+.back { margin-top: 2.5rem; }
+mjx-container[display="true"] { overflow-x: auto; overflow-y: hidden; }
+
+/* ---------- Footer ---------- */
+.site-footer { border-top: 1px solid var(--rule); color: var(--muted); font-size: 0.85rem; }
+.site-footer .wrap { padding-block: 1rem 1.5rem; }
+
+/* ---------- Phones and small tablets ---------- */
+@media (max-width: 760px) {
+  .layout { grid-template-columns: minmax(0, 1fr); gap: 2rem; padding-top: 1.5rem; }
+  .profile {
+    display: grid;
+    grid-template-columns: 5rem minmax(0, 1fr);
+    gap: 0 1rem;
+    align-items: start;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid var(--rule);
+  }
+  .profile-photo { grid-row: span 2; margin: 0; }
+  .profile-role { margin-bottom: 0.4rem; }
+  .profile-links { grid-column: 2; display: flex; flex-wrap: wrap; gap: 0.1rem 0.9rem; }
+  .profile-links .email { flex-basis: 100%; }
+  .dated li { grid-template-columns: minmax(0, 1fr); gap: 0; }
+}

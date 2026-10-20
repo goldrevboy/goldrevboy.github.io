@@ -1,0 +1,41 @@
+# ------------------------------------------------------------------
+# Site settings. Edit these first.
+# ------------------------------------------------------------------
+title: Parth Dabas
+description: "Parth Dabas, undergraduate in Computer Science at IIT (BHU) Varanasi. Fair division, programming languages, distributed systems."
+
+author:
+  name: Parth Dabas
+  role: Undergraduate, Computer Science
+  affiliation: IIT (BHU) Varanasi
+  photo:            # e.g. /assets/img/photo.jpg  (leave empty for a blank square)
+  email: parth.dabas2004 [at] gmail [dot] com   # written this way to slow down spam bots
+  github: https://github.com/goldrevboy
+  # scholar: https://scholar.google.com/citations?user=XXXX
+  linkedin: https://www.linkedin.com/in/parth-dabas-392445231
+  codeforces: https://codeforces.com/profile/goldrevboy
+
+# Top navigation, in order. Your name at the top left links to the home page.
+nav:
+  - title: Research
+    url: /research/
+  - title: Projects
+    url: /projects/
+  - title: Blog
+    url: /blog/
+  - title: CV
+    url: /cv/
+  - title: Misc
+    url: /misc/
+
+# Blog post URLs look like /blog/2026/my-post-title/
+permalink: /blog/:year/:title/
+
+# Leave these alone unless you know you need to change them.
+markdown: kramdown
+kramdown:
+  math_engine: mathjax
+exclude:
+  - README.md
+  - Gemfile
+  - Gemfile.lock

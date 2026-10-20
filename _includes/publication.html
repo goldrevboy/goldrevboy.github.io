@@ -1,0 +1,16 @@
+{% comment %}
+  Renders one entry from _data/publications.yml. You shouldn't need to edit this.
+{% endcomment %}
+{% assign me = site.author.name %}
+{% assign me_bold = "<strong>" | append: me | append: "</strong>" %}
+<li class="pub">
+  <span class="pub-title">{{ include.p.title }}</span>
+  <span class="pub-authors">{{ include.p.authors | replace: me, me_bold }}</span>
+  <span class="pub-venue">{{ include.p.venue }}{% if include.p.note %} · {{ include.p.note }}{% endif %}</span>
+  <span class="links">
+    {% if include.p.pdf %}<a href="{{ include.p.pdf | relative_url }}">PDF</a>{% endif %}
+    {% if include.p.arxiv %}<a href="{{ include.p.arxiv }}">arXiv</a>{% endif %}
+    {% if include.p.slides %}<a href="{{ include.p.slides | relative_url }}">Slides</a>{% endif %}
+    {% if include.p.code %}<a href="{{ include.p.code }}">Code</a>{% endif %}
+  </span>
+</li>
